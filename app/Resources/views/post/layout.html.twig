@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-sm-8">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <div class="col-sm-4">
+      {% block aside %}
+        {{ render(controller('AppBundle:Post:topPost')) }}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}
