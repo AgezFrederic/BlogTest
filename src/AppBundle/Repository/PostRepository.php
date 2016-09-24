@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Post;
 
 /**
  * PostRepository
@@ -12,4 +13,33 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+  public function getHomePagePost() 
+  {
+    $queryBuilder = $this->createQueryBuilder( 'p' )
+							->where('p.active = :active')
+							->setParameter('active', true)
+							->orderBy('p.createdAt', 'desc')
+              ->setMaxResults(POST::HP_MAX_RESULT);
+		return $queryBuilder->getQuery()->getResult();	
+  }
+
+  public function getTopPost()
+  {
+    $queryBuilder = $this->createQueryBuilder( 'p' );
+    $queryBuilder
+              ->addSelect('p.title, p.summary, p.slug')
+              ->leftJoin('p.comments', 'c')
+              ->addSelect('count(c.id) as nbOfComments')
+							->where('p.active = :active')
+              ->andWhere('c.approved = :approved')
+							->setParameters(array(
+                'active' => true,
+                'approved' => true,
+              ))
+              ->having('count(c.id) > 0')
+              ->groupBy('p.id')
+							->orderBy('nbOfComments', 'desc')
+              ->setMaxResults(POST::TOP_POST);
+		return $queryBuilder->getQuery()->getResult();
+  }
 }
