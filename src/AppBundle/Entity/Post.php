@@ -16,6 +16,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post
 {
+    // Number of post show in homepage 
+    const HP_MAX_RESULT = 5;
+
+    // Number of post show in top post aside block
+    const TOP_POST = 3; 
+
     /**
      * @var int
      *
