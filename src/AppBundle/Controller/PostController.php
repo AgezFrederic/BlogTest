@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Post;
+use AppBundle\Form\CommentType; 
 
 class PostController extends Controller
 {
@@ -29,10 +30,25 @@ class PostController extends Controller
     /**
      * @Route("/posts/{slug}", name="post_show")
      */
-    public function showAction(Post $post)
+    public function showAction(Post $post, Request $request)
     {
+        $form = $this->createForm(CommentType::class);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Comment $comment */
+            $comment = $form->getData();
+            $comment->setPost($post);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+
         return $this->render('post/show.html.twig', array(
             'post' => $post,
+            'form' => $form->createView(),
         ));
     }
 
