@@ -70,6 +70,14 @@ class Comment
     private $upadtedAt;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->approved = true; 
+    }
+
+    /**
      * Get id
      *
      * @return integer 

@@ -107,6 +107,7 @@ class Post
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+    
     /**
      * Constructor
      */
