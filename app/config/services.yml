@@ -7,3 +7,18 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+  twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+  app.comment_mailer:
+        class: AppBundle\Mailer\CommentMailer
+        arguments: [ "@twig", "@mailer" ]
+
+  app.comment_event_listener:
+        class: AppBundle\EventListener\CommentEventListener
+        arguments: [ "@app.comment_mailer"]
+        tags:  
+            - { name: doctrine.event_listener, event: postPersist }
