@@ -1,0 +1,16 @@
+<aside>
+{% if comments|length > 0 %} 
+  <h2>{% trans %}comment.title{% endtrans %}</h2>
+
+  {% for comment in comments %}
+    <div>
+      <strong>{{comment.userEmail}}</strong>
+      - 
+      {{ comment.createdAt|localizeddate('medium') }}
+    </div>
+    <div>{{comment.comment}}</div>
+  {% endfor %}
+{% else %}
+  {% trans %}comment.nocomment{% endtrans %}
+{% endif %}
+</aside>

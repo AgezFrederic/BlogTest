@@ -1,10 +1,20 @@
 {% extends 'post/layout.html.twig' %}
 
-{% block content %}
+{% block content %} 
+  <a href="{{path('homepage')}}">{% trans %}action.back{% endtrans %}</a>
   <article>
       <h1>{{post.title}}</h1>
+      <p>{{ post.tags }}</p>
+      <p>{{ post.createdAt|localizeddate('medium') }}</p>
       <div class="desc">
           {{post.content}}
       </div>
   </article>
+  <article>
+    {{form_start(form)}}
+        {{form_widget(form)}}
+        <button type="submit">{{ 'action.publish_comment'|trans }}</button>
+    {{form_end(form)}}
+  </article>
+  {{ include('comment/list.html.twig', { 'comments': post.comments }) }}
 {% endblock %}

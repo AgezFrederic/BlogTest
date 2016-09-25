@@ -1,5 +1,5 @@
 {% if posts %}
-  <h1>TOP POST</h1>
+  <h1>{% trans %}post.top{% endtrans %}</h1>
   {% for post in posts %}
       {{ include('post/post_details.html.twig', { 'post': post }) }}        
   {% endfor %}

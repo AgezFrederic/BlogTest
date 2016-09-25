@@ -3,5 +3,5 @@
     <div class="desc">
         {{post.summary}}
     </div>
-    <a href="{{path('post_show', {'slug': post.slug})}}">Voir plus</a>
+    <a href="{{path('post_show', {'slug': post.slug})}}">{% trans %}action.see_more{% endtrans %}</a>
 </article>

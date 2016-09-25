@@ -1,7 +1,7 @@
 {% extends 'post/layout.html.twig' %}
 
 {% block content %}
-  <h1>Accueil</h1>
+  <h1>{% trans %}home.title{% endtrans %}</h1>
   {% for post in posts %}
     {{ include('post/post_details.html.twig', { 'post': post }) }}        
   {% endfor %}
