@@ -1,0 +1,15 @@
+label:
+  user:
+    email: 'Email'
+  comment: 'Commentaire'
+action:
+  publish_comment: 'Publier mon commentaire'
+  back: 'Retour'
+  see_more: 'Voir plus'
+comment:  
+  title: 'Commentaires'
+  nocomment: 'Pas de commentaires'
+home:
+  title: 'Accueil'
+post: 
+  top: 'Top post'
